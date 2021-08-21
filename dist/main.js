@@ -100,13 +100,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, style) {\
 
 /***/ }),
 
+/***/ "./src/completed.js":
+/*!**************************!*\
+  !*** ./src/completed.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ completed)\n/* harmony export */ });\nfunction completed(arrs) {\r\n  const { li, arr, actions } = arrs;\r\n  const arrItem = arr.find((element) => element.description === li.textContent);\r\n  arrItem.completed = !arrItem.completed;\r\n  actions.update(arrItem);\r\n}\n\n//# sourceURL=webpack://todo-review/./src/completed.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\r\n\r\nconst todoArr = [\r\n  { description: 'Go to the cinema', completed: false, index: 1 },\r\n  { description: 'Watch football', completed: false, index: 2 },\r\n  { description: 'Have fun with my friends', completed: false, index: 3 },\r\n];\r\n\r\nconst displayTodo = (arr) => {\r\n  const todoListContainer = document.querySelector('.todo-list');\r\n  const ul = document.createElement('ul');\r\n  todoListContainer.appendChild(ul);\r\n\r\n  arr.forEach((e) => {\r\n    const li = document.createElement('li');\r\n    li.className = 'list-item p-3';\r\n\r\n    const checkBox = document.createElement('input');\r\n    checkBox.type = 'checkbox';\r\n  \r\n    const label = document.createElement('label');\r\n    label.textContent = e.description;\r\n\r\n    const listMenuIcon = document.createElement('i');\r\n    listMenuIcon.className = 'fas fa-ellipsis-v';\r\n\r\n    li.appendChild(checkBox);\r\n    li.appendChild(label);\r\n    li.appendChild(listMenuIcon);\r\n    ul.appendChild(li);\r\n });\r\n};\r\n\r\ndisplayTodo(todoArr);\n\n//# sourceURL=webpack://todo-review/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _completed_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./completed.js */ \"./src/completed.js\");\n/* harmony import */ var _localStorageActions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./localStorageActions.js */ \"./src/localStorageActions.js\");\n\r\n\r\n\r\n\r\nconst todoArr = [\r\n  { description: 'Go to the cinema', completed: false, index: 1 },\r\n  { description: 'Watch football', completed: false, index: 2 },\r\n  { description: 'Have fun with my friends', completed: false, index: 3 },\r\n];\r\n\r\nconst displayTodo = (arr, actions) => {\r\n  const todoListContainer = document.querySelector('.todo-list');\r\n  const ul = document.createElement('ul');\r\n  todoListContainer.appendChild(ul);\r\n\r\n  arr.forEach((e) => {\r\n    const li = document.createElement('li');\r\n    li.className = 'list-item p-3';\r\n\r\n    const checkBox = document.createElement('input');\r\n    checkBox.type = 'checkbox';\r\n    checkBox.checked = e.completed;\r\n\r\n    const label = document.createElement('label');\r\n    label.textContent = e.description;\r\n\r\n    const listMenuIcon = document.createElement('i');\r\n    listMenuIcon.className = 'fas fa-ellipsis-v';\r\n\r\n    const tasks = { li, arr, actions };\r\n    checkBox.addEventListener('change', _completed_js__WEBPACK_IMPORTED_MODULE_1__.default.bind(null, tasks));\r\n\r\n    li.appendChild(checkBox);\r\n    li.appendChild(label);\r\n    li.appendChild(listMenuIcon);\r\n    ul.appendChild(li);\r\n  });\r\n};\r\n\r\nconst actions = new _localStorageActions_js__WEBPACK_IMPORTED_MODULE_2__.default();\r\nconst localTodos = actions.get();\r\n\r\nif (localTodos.length === 0) {\r\n  actions.add(todoArr);\r\n  displayTodo(todoArr, actions);\r\n} else {\r\n  displayTodo(localTodos, actions);\r\n}\n\n//# sourceURL=webpack://todo-review/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/localStorageActions.js":
+/*!************************************!*\
+  !*** ./src/localStorageActions.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ LocalStorageActions)\n/* harmony export */ });\nclass LocalStorageActions {\r\n  constructor() {\r\n    this.localStorage = localStorage;\r\n  }\r\n  \r\n  add(arr) {\r\n    this.localStorage.setItem('Todos', JSON.stringify(arr));\r\n  }\r\n  \r\n  update(item) {\r\n    const todos = this.get();\r\n    const index = todos.findIndex((todo) => todo.description === item.description);\r\n    todos.splice(index, 1, item);\r\n    this.add(todos);\r\n  }\r\n  \r\n  get() {\r\n    let todos = JSON.parse(this.localStorage.getItem('Todos'));\r\n    if (todos === null) {\r\n      todos = [];\r\n    }\r\n    return todos;\r\n    }\r\n}\n\n//# sourceURL=webpack://todo-review/./src/localStorageActions.js?");
 
 /***/ })
 
