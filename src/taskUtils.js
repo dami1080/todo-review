@@ -37,5 +37,5 @@ export default class TaskUtils {
     const tasks = localTasks.filter((task) => task.completed === false);
     const indexedTasks = this.reIndexTasks(tasks);
     this.actions.updateAllItems(indexedTasks);
-  }
+}
 }
