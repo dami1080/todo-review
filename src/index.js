@@ -1,5 +1,6 @@
 import './style.css';
 import taskComplete from './completed.js';
+import LocalStorageActions from './localStorageActions.js';
 
 const todoArr = [
   { description: 'Go to the cinema', completed: false, index: 1 },
