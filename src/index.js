@@ -47,7 +47,6 @@ const deleteTodo = (li) => {
   window.location.reload();
 };
 
-
 const displayTodo = (arr, actions) => {
   const todoListContainer = document.querySelector('.todo-list');
   const ul = document.createElement('ul');
