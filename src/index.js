@@ -1,12 +1,17 @@
 import './style.css';
 import taskComplete from './completed.js';
 import LocalStorageActions from './localStorageActions.js';
+import Task from './task.js';
 
-const todoArr = [
-  { description: 'Go to the cinema', completed: false, index: 1 },
-  { description: 'Watch football', completed: false, index: 2 },
-  { description: 'Have fun with my friends', completed: false, index: 3 },
-];
+import TaskUtils from './taskUtils.js';
+
+const actions = new LocalStorageActions();
+const taskUtils = new TaskUtils(actions);
+const localTodos = actions.getItems();
+const addBtn = document.querySelector('.fa-level-down-alt');
+const addTodoInputField = document.querySelector('.add-todo-input');
+const completedTask = document.querySelector('.todo-footer');
+
 
 const displayTodo = (arr, actions) => {
   const todoListContainer = document.querySelector('.todo-list');
@@ -37,12 +42,14 @@ const displayTodo = (arr, actions) => {
   });
 };
 
-const actions = new LocalStorageActions();
-const localTodos = actions.get();
+displayTodo(localTodos, actions);
 
-if (localTodos.length === 0) {
-  actions.add(todoArr);
-  displayTodo(todoArr, actions);
-} else {
-  displayTodo(localTodos, actions);
-}
+const addTodo = () => {
+  const description = addTodoInputField.value;
+  const index = localTodos.length + 1;
+  const task = new Task(description, index);
+  if (description.length > 0) {
+    taskUtils.addTask(task, actions);
+    window.location.reload();
+  }
+};
