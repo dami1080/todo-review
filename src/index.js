@@ -17,7 +17,7 @@ const displayTodo = (arr) => {
 
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
-  
+
     const label = document.createElement('label');
     label.textContent = e.description;
 
@@ -28,7 +28,7 @@ const displayTodo = (arr) => {
     li.appendChild(label);
     li.appendChild(listMenuIcon);
     ul.appendChild(li);
- });
+  });
 };
 
 displayTodo(todoArr);
