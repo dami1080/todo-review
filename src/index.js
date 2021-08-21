@@ -7,28 +7,28 @@ const todoArr = [
 ];
 
 const displayTodo = (arr) => {
-    const todoListContainer = document.querySelector('.todo-list');
-    const ul = document.createElement('ul');
-    todoListContainer.appendChild(ul);
+  const todoListContainer = document.querySelector('.todo-list');
+  const ul = document.createElement('ul');
+  todoListContainer.appendChild(ul);
+
+  arr.forEach((e) => {
+    const li = document.createElement('li');
+    li.className = 'list-item p-3';
+
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
   
-    arr.forEach((e) => {
-      const li = document.createElement('li');
-      li.className = 'list-item p-3';
-  
-      const checkBox = document.createElement('input');
-      checkBox.type = 'checkbox';
-  
-      const label = document.createElement('label');
-      label.textContent = e.description;
-  
-      const listMenuIcon = document.createElement('i');
-      listMenuIcon.className = 'fas fa-ellipsis-v';
-  
-      li.appendChild(checkBox);
-      li.appendChild(label);
-      li.appendChild(listMenuIcon);
-      ul.appendChild(li);
-    });
+    const label = document.createElement('label');
+    label.textContent = e.description;
+
+    const listMenuIcon = document.createElement('i');
+    listMenuIcon.className = 'fas fa-ellipsis-v';
+
+    li.appendChild(checkBox);
+    li.appendChild(label);
+    li.appendChild(listMenuIcon);
+    ul.appendChild(li);
+ });
 };
-  
+
 displayTodo(todoArr);
